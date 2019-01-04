@@ -1,8 +1,8 @@
 {
   "expo": {
     "sdkVersion": "26.0.0",
-    "name": "Inertium Habit Tracker",
-    "slug": "inertium-habit-tracker",
+    "name": "Salat Tracker Tracker",
+    "slug": "salat-tracker",
     "icon": "src/images/app-icon.png",
 		"version": "1.0.0",
     "privacy": "public",
