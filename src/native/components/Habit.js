@@ -24,7 +24,9 @@ class Habit extends React.Component {
   }
 
   renderRow = (item, sectionID, rowID) => {
-    const { toggleItemStatus, openItemModal, startingDate, habitKey, updateFocusedHabitKey } = this.props;
+    const {
+      toggleItemStatus, openItemModal, startingDate, habitKey, updateFocusedHabitKey,
+    } = this.props;
     return (
       <ListItem style={styles.list}>
         <View>
@@ -46,7 +48,9 @@ class Habit extends React.Component {
   }
 
   render() {
-    const { title, items, openHabitModal, habitKey, goal } = this.props;
+    const {
+      title, items, openHabitModal, habitKey, goal,
+    } = this.props;
     const completedGoalCount = String(items.filter(item => item.status === 'done').length);
     return (
       <View>
