@@ -39,7 +39,7 @@ const Index = (
         <Stack
           key="home"
           title="MKA Salat Tracker"
-          icon={() => <Icon name="md-done-all" {...DefaultProps.icons} />}
+          icon={() => <Icon name="md-done-all" {...DefaultProps.icons} style={{ color: 'white', width: 25 }} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="home" component={HabitsContainer} Layout={HabitsComponent} />
@@ -48,7 +48,7 @@ const Index = (
         <Stack
           key="analytics"
           title="ANALYTICS"
-          icon={() => <Icon name="ios-stats" {...DefaultProps.icons} />}
+          icon={() => <Icon name="ios-stats" {...DefaultProps.icons} style={{ color: 'white', width: 25 }} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="analytics" component={AnalyticsContainer} Layout={AnalyticsComponent} />
@@ -57,7 +57,7 @@ const Index = (
         <Stack
           key="profile"
           title="PROFILE"
-          icon={() => <Icon name="md-person" {...DefaultProps.icons} />}
+          icon={() => <Icon name="md-person" {...DefaultProps.icons} style={{ color: 'white', width: 25 }} />}
           {...DefaultProps.navbarProps}
         >
           <Scene key="profileHome" component={AppContainer} Layout={ProfileComponent} />

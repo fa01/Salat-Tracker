@@ -10,10 +10,14 @@ export default class HabitItem extends React.Component {
 
   render() {
     const { id, startingDate, status } = this.props;
+    console.log('id =', id);
     const date = startingDate.clone().add(id, 'days');
+    console.log('date = ', date);
+    console.log('date.format =', date.format('ddd').toUpperCase());
     return (
-      <View ref={component => this._root = component} {...this.props}>
-        <View style={styles.dateContainer}>
+      <View ref={(component) => { this._root = component; }} {...this.props}>
+        {/* <View style={styles.dateContainer}> */}
+        <View>
           <Text style={status === 'done' ? styles.dateNameDone : styles.dateNameUndone}>
             { date.format('ddd').toUpperCase() }
           </Text>
@@ -41,8 +45,8 @@ const styles = StyleSheet.create({
   // CALENDAR DAY
   dateContainer: {
     flex: 1,
-    alignItems: 'center',
-    marginTop: boxWH / 7,
+    // alignItems: 'center',
+    // marginTop: boxWH / 7,
   },
   dateNameUndone: {
     textAlign: 'center',

@@ -69,7 +69,7 @@ class Habit extends React.Component {
                 <Icon
                   name="ios-settings"
                   style={{
-                    fontSize: 24, marginLeft: 5, marginRight: 5, color: '#555',
+                    fontSize: 24, marginLeft: 5, marginRight: 5, color: '#555', width: 25,
                   }}
                 />
               </TouchableHighlight>

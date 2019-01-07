@@ -54,12 +54,12 @@ export default class Row extends React.Component {
       saveHabit, openItemModal, openHabitModal, startingDate,
     } = this.props;
 
-    const { key, title, goal, items } = data;
+    const {
+      key, title, goal, items,
+    } = data;
 
     return (
-      <Animated.View style={[
-        this._style,
-      ]}>
+      <Animated.View style={[this._style]}>
         <Habit
           key={key}
           habitKey={key}
