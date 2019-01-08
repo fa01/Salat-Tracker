@@ -6,6 +6,10 @@ import configureStore from './src/store/index';
 // FacebookAds.AdSettings.addTestDevice(FacebookAds.AdSettings.currentDeviceHash);
 
 const { persistor, store } = configureStore();
+// console.log('persistor = \n', persistor.getState());
+// console.log(' store = \n', store.getState());
+// console.log(' habitsstore = \n', store.getState().habits);
+
 persistor.purge(); // Debug to clear persist
 console.ignoredYellowBox = ['Remote debugger'];
 
