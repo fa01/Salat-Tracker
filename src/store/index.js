@@ -33,8 +33,6 @@ const configureStore = () => {
   store.dispatch(verifyAuth());
 
   return { persistor, store };
-
-
 };
 
 
