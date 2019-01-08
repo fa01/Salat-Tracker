@@ -50,8 +50,11 @@ class HabitListing extends React.Component {
   }
 
   onNewHabit = async () => {
+    console.log('onNewHabit');
     const { createHabit } = this.props;
+    console.log('createHabit = ', createHabit);
     const { startingDate } = this.state;
+    console.log('startingDate = ', startingDate);
     const habitKey = generatePushID();
     await createHabit(startingDate, habitKey);
     this.openHabitModal(habitKey, '', 0);
@@ -285,7 +288,7 @@ class HabitListing extends React.Component {
           onMoveEnd={this.enableHabitListScroll}
           onRowMoved={this.reorderRows}
           renderRow={this.renderRow}
-          // renderFooter={this.renderNewHabitButton}
+          renderFooter={this.renderNewHabitButton}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}
