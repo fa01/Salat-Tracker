@@ -48,7 +48,6 @@ class Login extends React.Component {
 
   render() {
     const { loading, error } = this.props;
-    console.log('this.state.email = ', this.state.email);
     // Loading
     if (loading) return <Loading />;
 
