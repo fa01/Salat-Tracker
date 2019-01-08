@@ -13,8 +13,8 @@ const Profile = ({ member, logout }) => (
           <View>
             <Content padder>
               <Header
-                title={`Hi ${member.firstName},`}
-                content={`You are currently logged in as ${member.email}`}
+                title={`Hi ${member.userName}!`}
+                // content={`You are currently logged in as ${member.email}`}
               />
             </Content>
 
@@ -60,14 +60,14 @@ const Profile = ({ member, logout }) => (
                 <Text>Sign Up</Text>
               </Body>
             </ListItem>
-            <ListItem onPress={Actions.forgotPassword} icon>
+            {/* <ListItem onPress={Actions.forgotPassword} icon>
               <Left>
                 <Icon name="help-buoy" />
               </Left>
               <Body>
                 <Text>Forgot Password</Text>
               </Body>
-            </ListItem>
+            </ListItem> */}
           </View>
         }
       </List>

@@ -7,14 +7,16 @@ import { syncLocalToRemote } from './habits';
 
 const getUserRef = uid => FirebaseRef.child(`users/${uid}`).once('value').then(snap => snap.val());
 const updateUserLastLoggedIn = uid => FirebaseRef.child(`users/${uid}`).update({ lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP });
-const setUserDetails = (uid, firstName, lastName) => FirebaseRef.child(`users/${uid}`).set({
-  firstName,
-  lastName,
+// const setUserDetails = (uid, userName, lastName) => FirebaseRef.child(`users/${uid}`).set({
+const setUserDetails = (uid, userName) => FirebaseRef.child(`users/${uid}`).set({
+  userName,
+  // lastName,
   signedUp: Firebase.database.ServerValue.TIMESTAMP,
   lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
 });
-const updateUserFirstLastName = (uid, firstName, lastName) => FirebaseRef.child(`users/${uid}`).update({ firstName, lastName });
-
+// const updateUserFirstLastName = (uid, userName, lastName)
+// => FirebaseRef.child(`users/${uid}`).update({ userName, lastName });
+const updateUserFirstLastName = (uid, userName) => FirebaseRef.child(`users/${uid}`).update({ userName });
 
 const userDetailsUpdate = async (dispatch, data) => dispatch({ type: 'USER_DETAILS_UPDATE', data });
 const userLogin = async (dispatch, data) => dispatch({ type: 'USER_LOGIN', data });
@@ -25,13 +27,18 @@ const dataReset = async dispatch => dispatch({ type: 'DATA_RESET' });
   */
 export const signUp = formData => async (dispatch) => {
   try {
+    // const {
+    //   email, password, password2, userName, lastName,
+    // } = formData;
     const {
-      email, password, password2, firstName, lastName,
+      email, password, password2, userName,
     } = formData;
 
+    console.log('formData = ', formData);
+
     // Validation checks
-    if (!firstName) throw new Error(ErrorMessages.missingFirstName);
-    if (!lastName) throw new Error(ErrorMessages.missingLastName);
+    if (!userName) throw new Error(ErrorMessages.missingFirstName);
+    // if (!lastName) throw new Error(ErrorMessages.missingLastName);
     if (!email) throw new Error(ErrorMessages.missingEmail);
     if (!password) throw new Error(ErrorMessages.missingPassword);
     if (!password2) throw new Error(ErrorMessages.missingPassword);
@@ -42,7 +49,8 @@ export const signUp = formData => async (dispatch) => {
     const res = await Firebase.auth().createUserWithEmailAndPassword(email, password);
     // Send user details to Firebase database
     if (res && res.uid) {
-      await setUserDetails(res.uid, firstName, lastName);
+      // await setUserDetails(res.uid, userName, lastName);
+      await setUserDetails(res.uid, userName);
     }
 
     await statusMessage(dispatch, 'loading', false);
@@ -72,7 +80,11 @@ const getUserData = async (dispatch) => {
   */
 export const login = formData => async (dispatch, getState) => {
   try {
-    const { email, password } = formData;
+    let { email } = formData;
+    const { password } = formData;
+    console.log('login formData =', formData);
+    email = `${email}@test.com`;
+    console.log('email = ', email);
     await statusMessage(dispatch, 'loading', true);
 
     // Validation checks
@@ -87,7 +99,7 @@ export const login = formData => async (dispatch, getState) => {
       // Update last logged in data
       updateUserLastLoggedIn(res.uid);
       // Send verification Email when email hasn't been verified
-      if (res.emailVerified === false) Firebase.auth().currentUser.sendEmailVerification();
+      // if (res.emailVerified === false) Firebase.auth().currentUser.sendEmailVerification();
       // Get User Data
       getUserData(dispatch);
       await syncLocalToRemote(dispatch, getState);
@@ -131,8 +143,8 @@ export const updateProfile = formData => async (dispatch) => {
       email,
       password,
       password2,
-      firstName,
-      lastName,
+      userName,
+      // lastName,
       changeEmail,
       changePassword,
     } = formData;
@@ -142,8 +154,8 @@ export const updateProfile = formData => async (dispatch) => {
     if (!user.uid) throw new Error(ErrorMessages.missingFirstName);
 
     // Validation checks
-    if (!firstName) throw new Error(ErrorMessages.missingFirstName);
-    if (!lastName) throw new Error(ErrorMessages.missingLastName);
+    if (!userName) throw new Error(ErrorMessages.missingFirstName);
+    // if (!lastName) throw new Error(ErrorMessages.missingLastName);
     if (changeEmail) {
       if (!email) throw new Error(ErrorMessages.missingEmail);
     }
@@ -155,7 +167,8 @@ export const updateProfile = formData => async (dispatch) => {
 
     await statusMessage(dispatch, 'loading', true);
 
-    await updateUserFirstLastName(user.uid, firstName, lastName);
+    // await updateUserFirstLastName(user.uid, userName, lastName);
+    await updateUserFirstLastName(user.uid, userName);
     if (changeEmail) await Firebase.auth().currentUser.updateEmail(email);
     if (changePassword) await Firebase.auth().currentUser.updatePassword(password);
     await getUserData(dispatch);

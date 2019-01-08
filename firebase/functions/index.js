@@ -11,11 +11,12 @@ exports.cleanUserData = functions.database.ref('/users/{userId}').onWrite((event
   console.log('Making Full Name for UserID:', event.params.userId);
 
   // Get the first and last names
-  const firstName = event.data._newData.firstName || '';
-  const lastName = event.data._newData.lastName || '';
+  const userName = event.data._newData.userName || '';
+  // const lastName = event.data._newData.lastName || '';
 
   const userData = {
-    fullName: `${firstName} ${lastName}`,
+    // fullName: `${userName} ${lastName}`,
+    fullName: `${userName}`,
   };
 
   // Add Role if it doesn't already exist

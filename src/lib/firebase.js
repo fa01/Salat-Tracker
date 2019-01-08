@@ -27,6 +27,8 @@ if (
   });
 
   firebaseInitialized = true;
+  console.log('firebaseInitialized = ', firebaseInitialized);
+  console.log('module thing = ', FirebaseModule.database().ref());
 }
 
 export const FirebaseRef = firebaseInitialized ? FirebaseModule.database().ref() : null;

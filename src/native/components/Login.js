@@ -26,7 +26,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       email: (props.member && props.member.email) ? props.member.email : '',
-      password: '',
+      password: 'testtest',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +36,7 @@ class Login extends React.Component {
   handleChange = (name, val) => {
     this.setState({
       ...this.state,
-      [name]: val,
+      [name]: `${val}`,
     });
   }
 
@@ -48,7 +48,7 @@ class Login extends React.Component {
 
   render() {
     const { loading, error } = this.props;
-
+    console.log('this.state.email = ', this.state.email);
     // Loading
     if (loading) return <Loading />;
 
@@ -57,28 +57,28 @@ class Login extends React.Component {
         <Content padder>
           <Header
             title="Welcome back"
-            content="Please use your email and password to login."
+            content="Please use your username to login."
           />
 
           {error && <Messages message={error} />}
 
           <Form>
             <Item stackedLabel>
-              <Label>Email</Label>
+              <Label>Username</Label>
               <Input
                 autoCapitalize="none"
                 value={this.state.email}
-                keyboardType="email-address"
+                // keyboardType="email-address"
                 onChangeText={v => this.handleChange('email', v)}
               />
             </Item>
-            <Item stackedLabel>
+            {/* <Item stackedLabel>
               <Label>Password</Label>
               <Input
                 secureTextEntry
                 onChangeText={v => this.handleChange('password', v)}
               />
-            </Item>
+            </Item> */}
 
             <Spacer size={20} />
 

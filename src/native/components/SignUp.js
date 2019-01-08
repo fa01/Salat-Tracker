@@ -21,11 +21,11 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      userName: '',
+      // lastName: '',
       email: '',
-      password: '',
-      password2: '',
+      password: 'testtest',
+      password2: 'testtest',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,6 +36,7 @@ class SignUp extends React.Component {
     this.setState({
       ...this.state,
       [name]: val,
+      email: `${val}@test.com`,
     });
   }
 
@@ -56,18 +57,18 @@ class SignUp extends React.Component {
         <Content padder>
           <Header
             title="Welcome"
-            content="We're glad to welcome you to the community. There's only a few questions and you'll be on your way."
+            content="We're glad to welcome you to the community. Just create a username and you'll be on your way."
           />
 
           {error && <Messages message={error} />}
 
           <Form>
             <Item stackedLabel>
-              <Label>First Name</Label>
-              <Input onChangeText={v => this.handleChange('firstName', v)} />
+              <Label>Username</Label>
+              <Input onChangeText={v => this.handleChange('userName', v)} />
             </Item>
 
-            <Item stackedLabel>
+            {/* <Item stackedLabel>
               <Label>Last Name</Label>
               <Input onChangeText={v => this.handleChange('lastName', v)} />
             </Item>
@@ -89,7 +90,7 @@ class SignUp extends React.Component {
             <Item stackedLabel>
               <Label>Confirm Password</Label>
               <Input secureTextEntry onChangeText={v => this.handleChange('password2', v)} />
-            </Item>
+            </Item> */}
 
             <Spacer size={20} />
 

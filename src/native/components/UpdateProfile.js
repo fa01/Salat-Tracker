@@ -13,9 +13,9 @@ class UpdateProfile extends React.Component {
     loading: PropTypes.bool.isRequired,
     onFormSubmit: PropTypes.func.isRequired,
     member: PropTypes.shape({
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
-      email: PropTypes.string,
+      userName: PropTypes.string,
+      // lastName: PropTypes.string,
+      // email: PropTypes.string,
     }).isRequired,
   }
 
@@ -27,9 +27,9 @@ class UpdateProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: props.member.firstName || '',
-      lastName: props.member.lastName || '',
-      email: props.member.email || '',
+      userName: props.member.userName || '',
+      // lastName: props.member.lastName || '',
+      // email: props.member.email || '',
       password: '',
       password2: '',
       changeEmail: false,
@@ -74,18 +74,18 @@ class UpdateProfile extends React.Component {
             <Item stackedLabel>
               <Label>First Name</Label>
               <Input
-                value={this.state.firstName}
-                onChangeText={v => this.handleChange('firstName', v)}
+                value={this.state.userName}
+                onChangeText={v => this.handleChange('userName', v)}
               />
             </Item>
 
-            <Item stackedLabel>
+            {/* <Item stackedLabel>
               <Label>Last Name</Label>
               <Input
                 value={this.state.lastName}
                 onChangeText={v => this.handleChange('lastName', v)}
               />
-            </Item>
+            </Item> */}
 
             <ListItem>
               <CheckBox

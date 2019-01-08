@@ -14,8 +14,8 @@ import SignUpComponent from '../components/SignUp';
 import LoginContainer from '../../containers/Login';
 import LoginComponent from '../components/Login';
 
-import ForgotPasswordContainer from '../../containers/ForgotPassword';
-import ForgotPasswordComponent from '../components/ForgotPassword';
+// import ForgotPasswordContainer from '../../containers/ForgotPassword';
+// import ForgotPasswordComponent from '../components/ForgotPassword';
 
 import UpdateProfileContainer from '../../containers/UpdateProfile';
 import UpdateProfileComponent from '../components/UpdateProfile';
@@ -77,14 +77,14 @@ const Index = (
             component={LoginContainer}
             Layout={LoginComponent}
           />
-          <Scene
+          {/* <Scene
             back
             key="forgotPassword"
             title="FORGOT PASSWORD"
             {...DefaultProps.navbarProps}
             component={ForgotPasswordContainer}
             Layout={ForgotPasswordComponent}
-          />
+          /> */}
           <Scene
             back
             key="updateProfile"
