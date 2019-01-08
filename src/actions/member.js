@@ -1,12 +1,18 @@
-import moment from 'moment';
+// import moment from 'moment';
 import ErrorMessages from '../constants/errors';
 import statusMessage from './status';
 import { Firebase, FirebaseRef } from '../lib/firebase';
-import { syncLocalToRemote, getHabits, formatWeek } from './habits';
+import { syncLocalToRemote } from './habits';
+// import { syncLocalToRemote, getHabits, formatWeek } from './habits';
 
 const getUserRef = uid => FirebaseRef.child(`users/${uid}`).once('value').then(snap => snap.val());
 const updateUserLastLoggedIn = uid => FirebaseRef.child(`users/${uid}`).update({ lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP });
-const setUserDetails = (uid, firstName, lastName) => FirebaseRef.child(`users/${uid}`).set({ firstName, lastName, signedUp: Firebase.database.ServerValue.TIMESTAMP, lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP });
+const setUserDetails = (uid, firstName, lastName) => FirebaseRef.child(`users/${uid}`).set({
+  firstName,
+  lastName,
+  signedUp: Firebase.database.ServerValue.TIMESTAMP,
+  lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+});
 const updateUserFirstLastName = (uid, firstName, lastName) => FirebaseRef.child(`users/${uid}`).update({ firstName, lastName });
 
 
@@ -19,7 +25,9 @@ const dataReset = async dispatch => dispatch({ type: 'DATA_RESET' });
   */
 export const signUp = formData => async (dispatch) => {
   try {
-    const { email, password, password2, firstName, lastName } = formData;
+    const {
+      email, password, password2, firstName, lastName,
+    } = formData;
 
     // Validation checks
     if (!firstName) throw new Error(ErrorMessages.missingFirstName);
@@ -43,7 +51,7 @@ export const signUp = formData => async (dispatch) => {
     await statusMessage(dispatch, 'error', error.message);
     return Promise.reject();
   }
-}
+};
 
 /**
   * Get this User's Details
@@ -105,15 +113,14 @@ export const resetPassword = formData => async (dispatch) => {
 
     await Firebase.auth().sendPasswordResetEmail(email);
     await userReset(dispatch);
-    
-    await statusMessage(dispatch, 'loading', false); 
+    await statusMessage(dispatch, 'loading', false);
 
     return Promise.resolve();
   } catch (error) {
     await statusMessage(dispatch, 'error', error.message);
     return Promise.reject();
   }
-}
+};
 
 /**
   * Update Profile
@@ -174,14 +181,14 @@ export const logout = () => async (dispatch) => {
 
 export const verifyAuth = () => (dispatch) => {
   Firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        getUserData(dispatch);
-      }
-      // } else {
-      //   dispatch(logout());
-      // }
-    });
-}
+    if (user) {
+      getUserData(dispatch);
+    }
+    // } else {
+    //   dispatch(logout());
+    // }
+  });
+};
 
 /**
   * returns true if Firebase is initialised and user object exists (i.e. logged-in)
