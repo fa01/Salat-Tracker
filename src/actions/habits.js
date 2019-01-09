@@ -173,7 +173,8 @@ const createHabitRemote = async (habit, order) => {
 /**
   * Creates a new habit
   */
-export const createHabit = (today, habitKey) => async (dispatch, getState) => {
+export const createHabit = (today, habitKey, number) => async (dispatch, getState) => {
+  console.log('createHabit!!');
   const monday = today.clone().startOf('isoWeek');
 
   const firebaseItems = {};
@@ -186,11 +187,52 @@ export const createHabit = (today, habitKey) => async (dispatch, getState) => {
     };
   }
 
-  const newHabit = {
-    key: habitKey,
-    title: '',
-    items: firebaseItems,
-  };
+  let newHabit = {};
+  switch (number) {
+    case 0:
+      newHabit = {
+        key: habitKey,
+        title: 'Isha',
+        items: firebaseItems,
+      };
+      break;
+    case 1:
+      newHabit = {
+        key: habitKey,
+        title: 'Maghrib',
+        items: firebaseItems,
+      };
+      break;
+    case 2:
+      newHabit = {
+        key: habitKey,
+        title: 'Asr',
+        items: firebaseItems,
+      };
+      break;
+    case 3:
+      newHabit = {
+        key: habitKey,
+        title: 'Zuhr',
+        items: firebaseItems,
+      };
+      break;
+    case 4:
+      newHabit = {
+        key: habitKey,
+        title: 'Fajr',
+        items: firebaseItems,
+      };
+      break;
+    default:
+      newHabit = {
+        key: habitKey,
+        title: 'Tuhajjad',
+        items: firebaseItems,
+      };
+      break;
+  }
+
 
   // insert new habit into start
   const { habits } = getState();
