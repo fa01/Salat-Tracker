@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Content, Text, Icon, Picker, Form } from 'native-base';
 import { AreaChart, ProgressCircle } from 'react-native-svg-charts';
 import { Circle } from 'react-native-svg';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import PropTypes from 'prop-types';
 import platform from '../../../native-base-theme/variables/commonColor';
@@ -31,18 +31,20 @@ class Analytics extends React.Component {
     } = platform;
 
     const commitsData = [
-      { date: '2017-01-02', count: 1 },
-      { date: '2017-01-03', count: 2 },
-      { date: '2017-01-04', count: 3 },
-      { date: '2017-01-05', count: 4 },
-      { date: '2017-01-06', count: 5 },
-      { date: '2017-01-30', count: 2 },
-      { date: '2017-01-31', count: 3 },
-      { date: '2017-03-01', count: 2 },
-      { date: '2017-04-02', count: 4 },
-      { date: '2017-03-05', count: 2 },
-      { date: '2017-02-30', count: 4 },
+      { date: '2019-01-02', count: 1 },
+      { date: '2019-01-03', count: 2 },
+      { date: '2019-01-04', count: 3 },
+      { date: '2019-05-05', count: 4 },
+      { date: '2019-01-06', count: 5 },
+      { date: '2019-01-30', count: 2 },
+      { date: '2019-04-31', count: 3 },
+      { date: '2019-03-01', count: 2 },
+      { date: '2019-04-02', count: 4 },
+      { date: '2019-03-05', count: 2 },
+      { date: '2019-12-30', count: 4 },
     ];
+
+    const { height, width } = Dimensions.get('window');
 
     return (
       <Container>
@@ -132,12 +134,15 @@ class Analytics extends React.Component {
               />
             )}
           />
+
           <ContributionGraph
             values={commitsData}
-            endDate={new Date('2017-04-01')}
-            numDays={105}
-            width={400}
-            height={220}
+            endDate={new Date('2019-12-31')}
+            numDays={365}
+            width={width - 50}
+            height={height}
+            showOutOfRangeDays
+            horizontal={false}
             chartConfig={{
               backgroundColor: '#e26a00',
               backgroundGradientFrom: '#fb8c00',
@@ -149,7 +154,6 @@ class Analytics extends React.Component {
               },
             }}
           />
-
         </Content>
       </Container>
     );

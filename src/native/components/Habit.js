@@ -76,6 +76,8 @@ class Habit extends React.Component {
                 />
               :
                 <Picker
+                  mode="dropdown"
+                  iosIcon={<Icon name="ios-arrow-down-outline" />}
                   selectedValue={this.state.namazType}
                   style={{ height: 50, width: 100 }}
                   onValueChange={itemValue => this.setState({ namazType: itemValue })}
