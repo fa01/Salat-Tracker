@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { H3, List, ListItem, Icon } from 'native-base';
-import { View, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
-
+import { View, StyleSheet, Dimensions, TouchableHighlight, Picker, Platform } from 'react-native';
+import ModalSelector from 'react-native-modal-selector';
 import HabitItem from './HabitItem';
 import Spacer from './Spacer';
 
 class Habit extends React.Component {
+  state = {
+    namazType: 'Individual',
+  };
   // shouldComponentUpdate(nextProps) {
   //   const { habitKey, updateKey } = nextProps;
   //   return habitKey === updateKey;
@@ -52,14 +55,38 @@ class Habit extends React.Component {
       title, items, openHabitModal, habitKey, goal,
     } = this.props;
     const completedGoalCount = String(items.filter(item => item.status === 'done').length);
+    const data = [
+      { key: 1, label: 'Individual' },
+      { key: 2, label: 'Congregation' },
+      { key: 3, label: 'Mosque' },
+    ];
     return (
       <View>
         <View style={{ paddingLeft: boxWH / 2, paddingRight: boxWH / 2, paddingTop: 10 }}>
           <View style={{ flexDirection: 'row' }}>
             <View style={{ flexDirection: 'row', flex: 1 }}>
-              <H3>{title}{' ('}{completedGoalCount}{'/'}{String(goal || 0)}{')'}</H3>
+              <H3>{title}{' ('}{completedGoalCount}{'/'}{String(goal || 7)}{')'}</H3>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }} >
+              {Platform.OS === 'ios' ?
+                <ModalSelector
+                  data={data}
+                  initValue={this.state.namazType}
+                  onChange={(option) => { console.log('option = ', option); }}
+                />
+              :
+                <Picker
+                  selectedValue={this.state.namazType}
+                  style={{ height: 50, width: 100 }}
+                  onValueChange={itemValue => this.setState({ namazType: itemValue })}
+                >
+                  <Picker.Item label="Individual" value="Individual" />
+                  <Picker.Item label="Congregation" value="Congregation" />
+                  <Picker.Item label="Mosque" value="Mosque" />
+                </Picker>
+              }
+            </View>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }} >
               <TouchableHighlight
                 activeOpacity={1}
                 style={{ borderRadius: 4 }}
@@ -73,7 +100,7 @@ class Habit extends React.Component {
                   }}
                 />
               </TouchableHighlight>
-            </View>
+            </View> */}
           </View>
           <List
             dataArray={items}

@@ -224,10 +224,17 @@ export const createHabit = (today, habitKey, number) => async (dispatch, getStat
         items: firebaseItems,
       };
       break;
+    case 5:
+      newHabit = {
+        key: habitKey,
+        title: 'Tahajjud',
+        items: firebaseItems,
+      };
+      break;
     default:
       newHabit = {
         key: habitKey,
-        title: 'Tuhajjad',
+        title: 'Tuhajjud',
         items: firebaseItems,
       };
       break;

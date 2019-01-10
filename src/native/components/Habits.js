@@ -26,7 +26,7 @@ class HabitListing extends React.Component {
     habitModalVisible: false,
     activeHabit: null,
     habitName: '',
-    habitGoal: 0,
+    habitGoal: 7,
     activeRowID: null,
     habitCustomisationModalVisible: false,
     startingDate: moment().startOf('isoweek'),
@@ -93,7 +93,7 @@ class HabitListing extends React.Component {
     });
   }
 
-  openHabitModal = (key, name = '', goal = 0) => {
+  openHabitModal = (key, name = '', goal = 7) => {
     this.setState({
       habitModalVisible: true,
       habitName: name,
@@ -125,6 +125,8 @@ class HabitListing extends React.Component {
   }
 
   handleChange = (text, target) => {
+    console.log('text = ', text);
+    console.log('target = ', target);
     this.setState({
       ...this.state,
       [target]: text,
@@ -288,7 +290,7 @@ class HabitListing extends React.Component {
           onMoveEnd={this.enableHabitListScroll}
           onRowMoved={this.reorderRows}
           renderRow={this.renderRow}
-          renderFooter={this.renderNewHabitButton}
+          // renderFooter={this.renderNewHabitButton}
           refreshControl={
             <RefreshControl
               refreshing={this.state.refreshing}

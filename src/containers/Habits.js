@@ -41,7 +41,7 @@ class HabitListing extends Component {
   createInitialHabits = async () => {
     console.log('createInitialHabits');
     const startingDate = moment().startOf('isoweek');
-    for (let i = 0; i < 5; i += 1) {
+    for (let i = 0; i < 6; i += 1) {
       console.log('i = ', i);
       const habitKey = generatePushID();
       await this.props.createHabit(startingDate, habitKey, i);

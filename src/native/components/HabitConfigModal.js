@@ -45,7 +45,7 @@ const HabitConfigModal = ({
               <Input
                 defaultValue={String(defaultValues.goal)}
                 keyboardType="numeric"
-                onChangeText={text => handleChange(Number(text) || 0, 'habitGoal')}
+                onChangeText={text => handleChange(Number(text) || 7, 'habitGoal')}
               />
             </Item>
           </View>
