@@ -1,12 +1,13 @@
 import React from 'react';
-import { Container, Content, Text, Icon, Picker, Form } from 'native-base';
+import { Container, Content, Text, Icon, Picker, Form, Button } from 'native-base';
 import { AreaChart, ProgressCircle } from 'react-native-svg-charts';
 import { Circle } from 'react-native-svg';
-import { View, Dimensions } from 'react-native';
+import { View, Dimensions, Alert } from 'react-native';
 import { ContributionGraph } from 'react-native-chart-kit';
 import PropTypes from 'prop-types';
 import platform from '../../../native-base-theme/variables/commonColor';
 import Spacer from './Spacer';
+import { MailComposer } from 'expo'
 
 class Analytics extends React.Component {
   constructor(props) {
@@ -21,6 +22,14 @@ class Analytics extends React.Component {
     this.setState({
       habitSelected: value,
       habitData: this.props.habits.find(h => h.key === value),
+    });
+  }
+
+  openEmail = () => {
+    MailComposer.composeAsync({
+      recipient: '',
+      subject: 'this is a test',
+      body: 'test body',
     });
   }
 
@@ -151,6 +160,9 @@ class Analytics extends React.Component {
               },
             }}
           />
+          <Button onPress={this.openEmail}>
+            <Text>Click Me!</Text>
+          </Button>
         </Content>
       </Container>
     );
