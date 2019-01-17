@@ -36,7 +36,7 @@ class Analytics extends React.Component {
 
     console.log('habits = ', habits);
 
-    habits.map(habit => habit.items.forEach(day => day.status === 'done' && commitsData.push({
+    habits.forEach(habit => this.state.habitSelected === habit.key && habit.items.forEach(day => day.status === 'done' && commitsData.push({
       date: day.date,
       count: 5,
     })));
